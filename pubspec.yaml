@@ -1,6 +1,6 @@
 name: syrian_dio
 description: Production-ready networking layer for Flutter apps built on Dio (Result<T>, error mapping, retry, auth, refresh token).
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/muneerradwan-manager/syrian_dio
 repository: https://github.com/muneerradwan-manager/syrian_dio
 issue_tracker: https://github.com/muneerradwan-manager/syrian_dio/issues

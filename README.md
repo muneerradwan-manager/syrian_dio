@@ -12,7 +12,7 @@ A Flutter networking layer on top of Dio with:
 
 ```yaml
 dependencies:
-  syrian_dio: ^0.0.2
+  syrian_dio: ^0.0.3
 ```
 
 Then:
@@ -208,10 +208,25 @@ Future<void> fetchProfile(DioNetworkClient client) async {
 - `refreshPathContains`
 - `extraInterceptors`
 
+## Architecture Example (GetIt + Cubit + Dartz)
+
+For a full production-style integration using:
+- `get_it`
+- `flutter_bloc` (`Cubit`)
+- `dartz` (`Either`)
+- `shared_preferences`
+- `flutter_secure_storage`
+- `internet_connection_checker`
+
+See:
+
+`doc/get_it_cubit_dartz_auth_example.md`
+
 ## Error Model
 
 Possible `NetworkErrorType` values:
 - `noInternet`
+- `dnsFailure`
 - `timeout`
 - `cancelled`
 - `unauthorized`

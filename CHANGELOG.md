@@ -1,3 +1,15 @@
+## 0.0.3
+
+- Added `NetworkErrorType.dnsFailure` to distinguish DNS lookup failures from real connectivity loss.
+- Improved Dio error mapping for `connectionError`:
+  - DNS lookup failures now map to `dnsFailure`.
+  - Offline connectivity failures map to `noInternet`.
+  - Other connection failures map to `unknown` with clearer context.
+- Extended `NetworkError` with debug-friendly metadata: `rawMessage`, `host`, and `uri`.
+- Updated retry behavior to skip deterministic DNS failures (no useless retries for typo/invalid hostnames).
+- Added tests covering: offline connectivity, invalid hostname, timeout, 404, 500, and DNS no-retry behavior.
+- Added full architecture integration guide for `get_it` + `flutter_bloc` + `dartz` + `shared_preferences` + `flutter_secure_storage` + `internet_connection_checker` in `doc/get_it_cubit_dartz_auth_example.md`.
+
 ## 0.0.2
 
 - Added full README usage documentation with quick start, request examples, and refresh-token flow.

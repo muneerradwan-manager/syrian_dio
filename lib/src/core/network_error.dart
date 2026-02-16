@@ -3,6 +3,9 @@ enum NetworkErrorType {
   /// Connection issue or offline state.
   noInternet,
 
+  /// DNS resolution failed (for example invalid hostname).
+  dnsFailure,
+
   /// Timeout in connect/send/receive phases.
   timeout,
 
@@ -42,14 +45,35 @@ class NetworkError {
   /// Optional original error object.
   final Object? cause;
 
+  /// Original low-level message from Dio/Socket when available.
+  final String? rawMessage;
+
+  /// Host extracted from the request URI when available.
+  final String? host;
+
+  /// Request URI that triggered the error when available.
+  final Uri? uri;
+
   /// Creates a network error.
   const NetworkError({
     required this.type,
     required this.message,
     this.statusCode,
     this.cause,
+    this.rawMessage,
+    this.host,
+    this.uri,
   });
 
   @override
-  String toString() => 'NetworkError($type, $statusCode): $message';
+  String toString() {
+    final buffer = StringBuffer('NetworkError($type, $statusCode): $message');
+    if (host != null && host!.isNotEmpty) {
+      buffer.write(' [host=$host]');
+    }
+    if (rawMessage != null && rawMessage!.isNotEmpty) {
+      buffer.write(' [raw=$rawMessage]');
+    }
+    return buffer.toString();
+  }
 }

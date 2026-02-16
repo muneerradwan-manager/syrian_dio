@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
+import '../dio/connection_error_classifier.dart';
 
 /// Retries transient failures using exponential backoff with jitter.
 class RetryInterceptor extends Interceptor {
@@ -20,8 +21,12 @@ class RetryInterceptor extends Interceptor {
   });
 
   bool _shouldRetry(DioException err) {
-    if (err.type == DioExceptionType.connectionError ||
-        err.type == DioExceptionType.connectionTimeout ||
+    if (err.type == DioExceptionType.connectionError) {
+      // DNS failures are deterministic (e.g. typo host), retries won't help.
+      return classifyConnectionFailure(err) != ConnectionFailureKind.dnsFailure;
+    }
+
+    if (err.type == DioExceptionType.connectionTimeout ||
         err.type == DioExceptionType.receiveTimeout ||
         err.type == DioExceptionType.sendTimeout) {
       return true;
