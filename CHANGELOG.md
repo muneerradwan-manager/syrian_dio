@@ -1,3 +1,9 @@
+## 0.0.4
+
+- Inlined the full GetIt + Cubit + Dartz architecture integration guide directly in the main `README.md`.
+- Added the same integration guide to `example/README.md` so it shows on pub.dev's Example tab.
+- Updated documentation dependency snippets to `syrian_dio: ^0.0.4`.
+
 ## 0.0.3
 
 - Added `NetworkErrorType.dnsFailure` to distinguish DNS lookup failures from real connectivity loss.

@@ -47,7 +47,7 @@ lib/
 dependencies:
   flutter:
     sdk: flutter
-  syrian_dio: ^0.0.2
+  syrian_dio: ^0.0.4
   dio: ^5.9.1
   get_it: ^8.0.3
   flutter_bloc: ^8.1.6
