@@ -13,12 +13,14 @@ import '../interceptors/refresh_token_interceptor.dart';
 import '../token/token_store.dart';
 import '../token/refresh_types.dart';
 
+/// Dio-based implementation of [NetworkClient].
 class DioNetworkClient extends NetworkClient {
   final Dio _dio;
   final DioConfig _config;
 
   DioNetworkClient._(this._dio, this._config);
 
+  /// Creates a configurable networking client with optional retry/logging/refresh.
   factory DioNetworkClient({
     required DioConfig config,
     Dio? dio,
@@ -80,6 +82,7 @@ class DioNetworkClient extends NetworkClient {
     return DioNetworkClient._(d, config);
   }
 
+  /// Sends a request and maps all failures into [NetworkError].
   @override
   Future<Result<T>> send<T>({
     required NetworkRequest request,

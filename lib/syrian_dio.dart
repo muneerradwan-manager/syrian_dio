@@ -1,3 +1,4 @@
+// Public API exports for the syrian_dio package.
 // core
 export 'src/core/result.dart';
 export 'src/core/network_error.dart';

@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
 
+/// Basic console logger for request/response/error lifecycle events.
 class LoggingInterceptor extends Interceptor {
+  /// Whether to print response body payloads.
   final bool logBody;
+
+  /// Creates a logging interceptor.
   LoggingInterceptor({this.logBody = false});
 
   @override

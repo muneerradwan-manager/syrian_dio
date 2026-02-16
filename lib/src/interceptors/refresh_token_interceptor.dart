@@ -3,18 +3,27 @@ import 'package:dio/dio.dart';
 import '../token/token_store.dart';
 import '../token/refresh_types.dart';
 
+/// Handles 401 responses by refreshing tokens once and retrying the request.
 class RefreshTokenInterceptor extends Interceptor {
-  final Dio dio; // dio الأساسي للـ retry
+  /// Dio instance used for the retried request after refresh succeeds.
+  final Dio dio;
+
+  /// Token persistence abstraction.
   final TokenStore tokenStore;
+
+  /// User-defined refresh call.
   final RefreshCall refreshCall;
+
+  /// Called when refresh flow fails and request cannot be recovered.
   final void Function()? onRefreshFailed;
 
-  /// حتى نضمن refresh واحد فقط
+  /// Synchronizes concurrent 401 requests into a single refresh operation.
   Completer<void>? _refreshCompleter;
 
-  /// لمنع loop: حدّد مسار refresh endpoint
+  /// Path fragment used to identify refresh endpoint requests.
   final String refreshPathContains;
 
+  /// Creates a refresh token interceptor.
   RefreshTokenInterceptor({
     required this.dio,
     required this.tokenStore,

@@ -1,11 +1,18 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
 
+/// Retries transient failures using exponential backoff with jitter.
 class RetryInterceptor extends Interceptor {
+  /// Dio instance used to re-dispatch failed requests.
   final Dio dio;
+
+  /// Maximum retry attempts per request.
   final int maxRetries;
+
+  /// Initial backoff delay.
   final Duration baseDelay;
 
+  /// Creates a retry interceptor.
   RetryInterceptor({
     required this.dio,
     this.maxRetries = 3,

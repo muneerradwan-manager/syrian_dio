@@ -1,14 +1,21 @@
+/// Configuration used to initialize [DioNetworkClient].
 class DioConfig {
+  /// Base URL for all outgoing requests.
   final String baseUrl;
+
+  /// Maximum time to establish a connection.
   final Duration connectTimeout;
+
+  /// Maximum time to receive response data.
   final Duration receiveTimeout;
 
-  /// token وقت الطلب (ديناميكي)
+  /// Asynchronous token provider called before each request.
   final Future<String?> Function()? tokenProvider;
 
-  /// callback إذا فشل refresh أو صار unauthorized نهائي
+  /// Callback invoked when authentication fails and recovery is not possible.
   final void Function()? onUnauthorized;
 
+  /// Creates Dio-level configuration.
   const DioConfig({
     required this.baseUrl,
     this.connectTimeout = const Duration(seconds: 15),

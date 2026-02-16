@@ -2,12 +2,15 @@ import 'http_method.dart';
 import 'network_request.dart';
 import 'result.dart';
 
+/// Base client contract that returns [Result] instead of throwing.
 abstract class NetworkClient {
+  /// Sends a request and parses raw response data using [parser].
   Future<Result<T>> send<T>({
     required NetworkRequest request,
     required T Function(dynamic raw) parser,
   });
 
+  /// Convenience method for GET requests.
   Future<Result<T>> get<T>(
     String path, {
     Map<String, dynamic>? query,
@@ -25,6 +28,7 @@ abstract class NetworkClient {
     );
   }
 
+  /// Convenience method for POST requests.
   Future<Result<T>> post<T>(
     String path, {
     dynamic body,
@@ -44,6 +48,7 @@ abstract class NetworkClient {
     );
   }
 
+  /// Convenience method for PUT requests.
   Future<Result<T>> put<T>(
     String path, {
     dynamic body,
@@ -63,6 +68,7 @@ abstract class NetworkClient {
     );
   }
 
+  /// Convenience method for PATCH requests.
   Future<Result<T>> patch<T>(
     String path, {
     dynamic body,
@@ -82,6 +88,7 @@ abstract class NetworkClient {
     );
   }
 
+  /// Convenience method for DELETE requests.
   Future<Result<T>> delete<T>(
     String path, {
     dynamic body,
